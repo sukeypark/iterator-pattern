@@ -4,15 +4,19 @@ import java.util.Iterator;
 
 public class MenuTree implements Iterable<MenuItem> {
 
-    MenuItem root;
-
-    public MenuTree(MenuItem root) {
-        this.root = root;
-    }
+    private MenuItem root;
 
     @Override
     public Iterator<MenuItem> iterator() {
-        return new MenuTreeIterator();
+        return new MenuTreeIterator(this);
+    }
+
+    public MenuItem getRoot() {
+        return root;
+    }
+
+    public void addItem() {
+        throw new UnsupportedOperationException("Unimplemented method 'addItem'");
     }
 
 }

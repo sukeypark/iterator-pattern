@@ -38,4 +38,9 @@ public class MenuItem extends Node {
         this.price = price;
     }
 
+    public void print() {
+        System.out.println(String.format(
+                "name: %s\ndescription: %s\nprice: %d", name, description, price));
+    }
+
 }
