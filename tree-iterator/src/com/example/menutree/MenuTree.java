@@ -1,14 +1,17 @@
-package com.example;
+package com.example.menutree;
 
 import java.util.Iterator;
 
-public class MenuTree implements Iterable<MenuItem> {
+import com.example.menutree.iterator.MenuTreeIterator;
+import com.example.node.MenuItem;
+
+public abstract class MenuTree implements Iterable<MenuItem> {
 
     private MenuItem root;
 
     @Override
     public Iterator<MenuItem> iterator() {
-        return new MenuTreeIterator(this);
+        return createIterator();
     }
 
     public MenuItem getRoot() {
@@ -18,5 +21,7 @@ public class MenuTree implements Iterable<MenuItem> {
     public void addItem() {
         throw new UnsupportedOperationException("Unimplemented method 'addItem'");
     }
+
+    abstract protected MenuTreeIterator createIterator();
 
 }

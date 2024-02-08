@@ -1,4 +1,4 @@
-package com.example;
+package com.example.node;
 
 public class MenuItem extends Node {
 

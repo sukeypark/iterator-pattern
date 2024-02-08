@@ -1,4 +1,4 @@
-package com.example;
+package com.example.node;
 
 public abstract class Node {
 

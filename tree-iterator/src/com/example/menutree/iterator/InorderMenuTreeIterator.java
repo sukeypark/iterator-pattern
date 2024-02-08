@@ -1,16 +1,13 @@
-package com.example;
+package com.example.menutree.iterator;
 
-import java.util.Iterator;
+import com.example.menutree.MenuTree;
+import com.example.node.MenuItem;
 
-public class MenuTreeIterator implements Iterator<MenuItem> {
+public class InorderMenuTreeIterator extends MenuTreeIterator {
 
-    private MenuTree menuTree;
-
-    private MenuItem currentItem;
-
-    public MenuTreeIterator(MenuTree menuTree) {
-        this.menuTree = menuTree;
-        this.currentItem = menuTree.getRoot();
+    public InorderMenuTreeIterator(MenuTree menuTree) {
+        super(menuTree);
+        // TODO Auto-generated constructor stub
     }
 
     @Override
