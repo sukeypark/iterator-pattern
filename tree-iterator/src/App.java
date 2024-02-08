@@ -1,5 +1,5 @@
-import com.example.MenuItem;
 import com.example.MenuTree;
+import com.example.Waitress;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -9,8 +9,7 @@ public class App {
          * Add tree items
          */
 
-        for (MenuItem menuItem : menuTree) {
-            menuItem.print();
-        }
+        Waitress waitress = new Waitress(menuTree);
+        waitress.printMenuItems();
     }
 }
