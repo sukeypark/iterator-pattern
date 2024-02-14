@@ -35,23 +35,21 @@ class MenuItemTree(ABC):
     def add_item(self, item: MenuItem):
         if not self.root:
             self.root = item
-            self.tail = item
-            return
-
-        node = self.root
-        while node != self.tail:
-            if item.price < node.price:
-                if not node.left:
-                    node.left = item
-                    break
+        else:
+            node = self.root
+            while node != self.tail:
+                if item.price < node.price:
+                    if not node.left:
+                        node.left = item
+                        break
+                    else:
+                        node = node.left
                 else:
-                    node = node.left
-            else:
-                if not node.right:
-                    node.right = item
-                    break
-                else:
-                    node = node.right
+                    if not node.right:
+                        node.right = item
+                        break
+                    else:
+                        node = node.right
         self.tail = item
 
     @abstractmethod
