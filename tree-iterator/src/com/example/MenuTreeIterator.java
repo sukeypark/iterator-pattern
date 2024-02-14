@@ -19,8 +19,8 @@ public class MenuTreeIterator implements Iterator<MenuItem> {
         if (menuItem == null) {
             return;
         }
-        q.add(menuItem);
         traverse(menuItem.getLeft());
+        q.add(menuItem);
         traverse(menuItem.getRight());
     }
 

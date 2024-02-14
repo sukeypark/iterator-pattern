@@ -2,11 +2,14 @@ package com.example;
 
 import java.util.Iterator;
 import java.util.Queue;
+import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class MenuTree implements Iterable<MenuItem> {
 
     private MenuItem root;
+
+    private MenuItem tail;
 
     @Override
     public Iterator<MenuItem> iterator() {
@@ -20,46 +23,51 @@ public class MenuTree implements Iterable<MenuItem> {
     public void addItem(MenuItem menuItem) {
         if (root == null) {
             root = menuItem;
+            tail = root;
             return;
         }
-        Queue<MenuItem> q = new ArrayBlockingQueue<>(50);
-        q.add(root);
-        MenuItem parent = null;
-        while ((parent = q.poll()) != null) {
-            if (parent.getLeft() != null) {
-                q.add(parent.getLeft());
-                if (parent.getRight() != null) {
-                    q.add(parent.getRight());
+        MenuItem current = root;
+        while (current != null) {
+            if (current.getPrice() >= menuItem.getPrice()) {
+                if (current.getLeft() != null) {
+                    current = current.getLeft();
                 } else {
+                    current.setLeft(menuItem);
                     break;
                 }
             } else {
-                break;
+                if (current.getRight() != null) {
+                    current = current.getRight();
+                } else {
+                    current.setRight(menuItem);
+                    break;
+                }
             }
         }
-        if (parent.getLeft() == null) {
-            parent.setLeft(menuItem);
-        } else if (parent.getRight() == null) {
-            parent.setRight(menuItem);
-        }
+        tail = menuItem;
     }
 
     public void print() {
-        Queue<MenuItem> q = new ArrayBlockingQueue<>(50);
+        Queue<MenuItem> q = new ArrayBlockingQueue<>(100);
         q.add(root);
 
         int level = 0;
         int count = 0;
         MenuItem current = null;
+        MenuItem blankNode = new MenuItem("None", null, -1);
 
-        while ((current = q.poll()) != null) {
-            System.out.print(current.getName() + " ");
+        while ((current = q.poll()) != tail) {
+            System.out.print(current.getName() + "|" + current.getPrice() + " ");
             count++;
             if (current.getLeft() != null) {
                 q.add(current.getLeft());
-                if (current.getRight() != null) {
-                    q.add(current.getRight());
-                }
+            } else {
+                q.add(blankNode);
+            }
+            if (current.getRight() != null) {
+                q.add(current.getRight());
+            } else {
+                q.add(blankNode);
             }
             if (count == Math.pow(2, level)) {
                 System.out.print("\n");
@@ -71,8 +79,11 @@ public class MenuTree implements Iterable<MenuItem> {
 
     public static void main(String[] args) {
         MenuTree tree = new MenuTree();
-        for (int i = 0; i < 16; i++) {
-            tree.addItem(new MenuItem("menu" + i, "menu" + i, 0));
+
+        Random rand = new Random();
+
+        for (int i = 0; i < 8; i++) {
+            tree.addItem(new MenuItem("menu" + i, "menu" + i, Math.abs(rand.nextDouble()) * 10));
         }
         tree.print();
     }
