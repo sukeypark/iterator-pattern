@@ -35,6 +35,7 @@ class MenuItemTree(ABC):
     def add_item(self, item: MenuItem):
         if not self.root:
             self.root = item
+            self.tail = item
             return
 
         node = self.root
