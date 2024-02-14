@@ -10,7 +10,7 @@ public class Waitress {
 
     public void printMenuItems() {
         for (MenuItem menuItem : menu) {
-            menuItem.print();
+            System.out.println(menuItem);
         }
     }
 

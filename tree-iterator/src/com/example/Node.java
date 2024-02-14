@@ -6,19 +6,19 @@ public abstract class Node {
 
     private Node right;
 
-    public Node getLeft() {
-        return left;
+    public <T extends Node> T getLeft() {
+        return (T) left;
     }
 
     public void setLeft(Node left) {
         this.left = left;
     }
 
-    public Node getRight() {
-        return right;
+    public <T extends Node> T getRight() {
+        return (T) right;
     }
 
-    public void setRight(Node right) {
+    public <T extends Node> void setRight(T right) {
         this.right = right;
     }
 

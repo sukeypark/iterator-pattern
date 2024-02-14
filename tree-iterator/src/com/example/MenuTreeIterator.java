@@ -1,28 +1,37 @@
 package com.example;
 
 import java.util.Iterator;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class MenuTreeIterator implements Iterator<MenuItem> {
 
     private MenuTree menuTree;
 
-    private MenuItem currentItem;
+    private Queue<MenuItem> q = new ArrayBlockingQueue<>(50);
 
     public MenuTreeIterator(MenuTree menuTree) {
         this.menuTree = menuTree;
-        this.currentItem = menuTree.getRoot();
+        this.traverse(menuTree.getRoot());
+    }
+
+    private void traverse(MenuItem menuItem) {
+        if (menuItem == null) {
+            return;
+        }
+        q.add(menuItem);
+        traverse(menuItem.getLeft());
+        traverse(menuItem.getRight());
     }
 
     @Override
     public boolean hasNext() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
+        return !q.isEmpty();
     }
 
     @Override
     public MenuItem next() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
+        return q.poll();
     }
 
 }
