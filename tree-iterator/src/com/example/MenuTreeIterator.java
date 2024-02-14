@@ -12,16 +12,16 @@ public class MenuTreeIterator implements Iterator<MenuItem> {
 
     public MenuTreeIterator(MenuTree menuTree) {
         this.menuTree = menuTree;
-        this.traverse(menuTree.getRoot());
+        this.createQueue(menuTree.getRoot());
     }
 
-    private void traverse(MenuItem menuItem) {
+    private void createQueue(MenuItem menuItem) {
         if (menuItem == null) {
             return;
         }
         q.add(menuItem);
-        traverse(menuItem.getLeft());
-        traverse(menuItem.getRight());
+        createQueue(menuItem.getLeft());
+        createQueue(menuItem.getRight());
     }
 
     @Override
